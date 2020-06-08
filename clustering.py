@@ -195,7 +195,9 @@ def main():
         else:
             plt.title("Entropy of Clusters for " + key + " Tree Clustering")
         plt.xticks(x_pos, list(clusters))
+        plt.savefig(fname="outputs/" + key + "_entropy_clusters.png", transparent=True, dpi=300)
         plt.show()
+        plt.clf()
         ###
 
         entropy_by_nation = compute_entropy_by_class(clusters, nations)
@@ -219,7 +221,9 @@ def main():
             plt.title(r"Entropy of Nations for " + key + " Tree Clustering")
         plt.xticks(x_pos, nation_array)
         plt.xticks(rotation=90)
+        plt.savefig(fname="outputs/"+key+"_entropy_nation.png", transparent=True, dpi=300, bbox_inches = 'tight')
         plt.show()
+        plt.clf()
         ###
 
         print("~" * 30)
