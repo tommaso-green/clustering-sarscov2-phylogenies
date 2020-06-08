@@ -5,6 +5,10 @@ import numpy as np
 from Bio import SeqIO
 from astropy.table import Table
 import matplotlib.pyplot as plt
+from matplotlib import rc
+
+rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+rc('text', usetex=True)
 
 
 def get_dict_of_nations(filename):
@@ -131,13 +135,13 @@ def main():
     threshold_free = args.threshold_free
 
     print("~" * 30)
-    for key in file_dict.keys():
+    for key in list(file_dict):
         print("Starting clustering for " + key)
         command = "python TreeCluster.py -i "
         command += file_dict[key]
         if key in ["Pairwise", "ClustalW"]:
             command += " -t " + str(alignment_threshold)
-        elif key in ["D2"]:
+        elif key == "D2":
             command += " -t " + str(d2_threshold)
         else:
             command += " -t " + str(d2star_threshold)
@@ -181,9 +185,15 @@ def main():
         plt.bar(x_pos, entropy_vector, color='red')
         plt.xlabel("Clusters")
         plt.ylabel("Entropy")
-        plt.axhline(y=math.log(len(nations), 2), color='gray', linestyle='--') # max_entropy
+        plt.axhline(y=math.log(len(nations), 2), color='gray', linestyle='--')  # max_entropy
         plt.annotate("Max entropy", xy=(1, math.log(len(nations), 2) - 0.1))
-        plt.title("Entropy of Clusters for " + key + " Tree Clustering")
+        if key == "D2":
+            print("hey")
+            plt.title("Entropy of Clusters for " + "$EP_{2}$" + " Tree Clustering")
+        elif key == "D2Star":
+            plt.title("Entropy of Clusters for " + "$EP_{2}^{*}$" + " Tree Clustering")
+        else:
+            plt.title("Entropy of Clusters for " + key + " Tree Clustering")
         plt.xticks(x_pos, list(clusters))
         plt.show()
         ###
@@ -201,7 +211,12 @@ def main():
         plt.ylabel("Entropy of Nation")
         plt.axhline(y=math.log(no_of_clusters, 2), color='gray', linestyle='--')
         plt.annotate("Max entropy", xy=(1, math.log(no_of_clusters, 2) + 0.03))
-        plt.title("Entropy of Nations for " + key + " Tree Clustering")
+        if key == "D2":
+            plt.title("Entropy of Nations for " + "$EP_{2}$" + " Tree Clustering")
+        elif key == "D2Star":
+            plt.title("Entropy of Nations for " + "$EP_{2}^{*}$" + " Tree Clustering")
+        else:
+            plt.title(r"Entropy of Nations for " + key + " Tree Clustering")
         plt.xticks(x_pos, nation_array)
         plt.xticks(rotation=90)
         plt.show()
