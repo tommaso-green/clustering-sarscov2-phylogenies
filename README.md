@@ -35,4 +35,4 @@ python3 clustering.py -t 7.12E-4 -td2 0.4 -td2* 0.65 -m sum_branch
 * [NiemaDS](https://github.com/niemasd/NiemaDS)
 * [TreeSwift](https://github.com/niemasd/TreeSwift)
 * [Astropy](https://www.astropy.org/)
-* [Matplotlib](https://matplotlib.org/)
+* [Matplotlib](https://matplotlib.org/) (with support to LaTeX)
