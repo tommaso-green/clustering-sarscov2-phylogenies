@@ -188,7 +188,6 @@ def main():
         plt.axhline(y=math.log(len(nations), 2), color='gray', linestyle='--')  # max_entropy
         plt.annotate("Max entropy", xy=(1, math.log(len(nations), 2) - 0.1))
         if key == "D2":
-            print("hey")
             plt.title("Entropy of Clusters for " + "$EP_{2}$" + " Tree Clustering")
         elif key == "D2Star":
             plt.title("Entropy of Clusters for " + "$EP_{2}^{*}$" + " Tree Clustering")
